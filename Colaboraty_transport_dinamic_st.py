@@ -146,7 +146,7 @@ class Colaboraty_transport_dinamic_st():
         **Conjuntos:**
 
          - $i \in I$: Locacion de las familias + colegio, donde $i=c$ es el colegio.
-         - $t \in T$: Periodo (5 en total)
+         - $t \in T$: Periodo 
 
         **Parametros:**
 
