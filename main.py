@@ -3,8 +3,16 @@ from Colaboraty_transport_st import Colaboratory_Transport_st
 from Colaboraty_transport_dinamic_st import Colaboraty_transport_dinamic_st
 from Facility_Location_st import Facility_Location_st
 from TSP_MTZ_st import TSP_MTZ_st
+from PIL import Image
 
-st.title('Modelos de Transporte')
+
+
+col1, col2 = st.columns(2)
+
+img = Image.open('logo_escalado.png')
+st.col1.image(img)
+
+st.col2.title('Modelos de Transporte')
 
 st.write('''
 ## **Contexto**
@@ -17,6 +25,7 @@ Asi, durante la conversacion, se originaron distintas estrategias de como aborda
 3. **Modelo con buses de acercamiento a domicilio**
 
 ''')
+
 
 st.sidebar.write('**Modelos**')
 model_name = st.sidebar.selectbox('Seleccionar Modelo',
