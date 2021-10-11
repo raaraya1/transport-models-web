@@ -10,9 +10,9 @@ from PIL import Image
 col1, col2 = st.columns(2)
 
 img = Image.open('logo_escalado.png')
-st.col1.image(img)
+col1.image(img)
 
-st.col2.title('Modelos de Transporte')
+col2.title('Modelos de Transporte')
 
 st.write('''
 ## **Contexto**
