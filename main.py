@@ -7,7 +7,7 @@ from PIL import Image
 
 
 
-col1, col2, _, __, ___ = st.columns(5)
+col1, col2 = st.columns([1, 5])
 
 img = Image.open('logo_escalado.png')
 col1.image(img)
