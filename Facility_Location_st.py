@@ -216,7 +216,7 @@ class Facility_Location_st():
                                    file_name='model_file.txt')
 
 
-        st.sidebar.write('**Datos**')    
+        st.sidebar.write('**Datos**')
 
         cost_matrix = st.sidebar.file_uploader('Selecciona el archivo con la matriz de costos entre los hogares y los paraderos (csv - xlsx)')
         initial_route_cost = st.sidebar.file_uploader('Selecciona el archivo con la matriz de costos entre los hogares y el colegio (csv - xlsx)')
@@ -226,7 +226,7 @@ class Facility_Location_st():
             df = pd.read_csv(cost_matrix, sep=';', header=None)
             n_locations = len(df)
             n_paraderos = len(df.to_numpy()[0])
-            columns = [i+1 for i in range(3)]
+            columns = [i+1 for i in range(n_paraderos)]
             rows = [i+1 for i in range(n_locations)]
             df.columns = columns
             df.index = rows
