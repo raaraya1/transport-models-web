@@ -16,12 +16,12 @@ col2.title('Modelos de Transporte')
 
 st.write('''
 ## **Contexto**
-Este problema surgio de la conversacion entre un grupo de amigos, y este consistia principalmente en organizar las idas y llegadas al colegio, debido a que, con el sistema actual, colapsaba el numero de estacionamientos en el recinto.
+El problema que se plantea a continuación surgió de la conversación entre un grupo de amigos, y este consistía principalmente en organizar las idas y llegadas al colegio, debido a que, con el sistema actual, se colapsaba el número de estacionamientos en el lugar.
 
-Asi, durante la conversacion, se originaron distintas estrategias de como abordar el problema, todas ellas planteando distintos enfoques de modelos de optimizacion.
+Así, durante la conversación, se originaron distintas estrategias de cómo abordar el problema, todas ellas planteando distintos enfoques de modelación.
 
 1. **Modelo con sistema de turnos y apoyo entre vecinos**
-2. **Modelo con buses de acercamiento en puntos especificos**
+2. **Modelo con buses de acercamiento en puntos específicos (paraderos)**
 3. **Modelo con buses de acercamiento a domicilio**
 
 ''')
