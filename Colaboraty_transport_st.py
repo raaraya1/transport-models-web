@@ -365,9 +365,9 @@ class Colaboratory_Transport_st():
                 for i in X:
                   if X[i] > 0:
                       if i[0] == 'c':
-                          rutas_selec.append((6, i[1]))
+                          rutas_selec.append((last_term, i[1]))
                       elif i[1] == 'c':
-                          rutas_selec.append((i[0], 6))
+                          rutas_selec.append((i[0], last_term))
                       else:
                           rutas_selec.append(i)
 
