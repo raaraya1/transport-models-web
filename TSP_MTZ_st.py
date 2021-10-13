@@ -1,8 +1,11 @@
 import streamlit as st
+from streamlit_folium import folium_static
 import pandas as pd
 import numpy as np
 import requests
 from gurobipy import Model, quicksum, GRB
+from mapas import Mapas
+import folium
 
 class TSP_MTZ():
   def __init__(self, Matrix_cost):
@@ -130,6 +133,12 @@ class TSP_MTZ_st():
 
         st.sidebar.write('**Archivos descargables**')
 
+        coord_file = pd.read_csv('https://raw.githubusercontent.com/raaraya1/Personal-Proyects/main/Proyectos/web_app/coordenadas.csv')
+        st.sidebar.download_button(label='Locaciones.csv',
+                                   data=coord_file.to_csv(index=False),
+                                   file_name='coordenadas.csv',
+                                   mime='text/csv')
+
         cost_matrix_csv = pd.read_csv('https://raw.githubusercontent.com/raaraya1/transport-models-web/main/cost_matrix.csv')
         st.sidebar.download_button(label='matrix_cost.csv',
                                    data=cost_matrix_csv.to_csv(index=False),
@@ -191,3 +200,89 @@ class TSP_MTZ_st():
             except:
                 sol = modelo.solve()
                 st.write(str(sol))
+
+            st.sidebar.write('**Visualizacion de resultados**')
+
+            st.write(r'''
+            ### Visualizacion de Resultados
+            Para la visualizacion de los resultados es
+            necesario crearnos una cuenta de usuario en
+            https://openrouteservice.org y luego utilizar la clave
+            generada (esta luego la debemos introducir en el panel a la izquierda)
+
+            - **Puntos Verdes**: Donde se inicia el transporte
+            - **Puntos Azules**: Donde se recogen niños
+            - **Punto Rojo**: Destino final (para este caso el colegio)
+
+            **Nota:** Es necesario establecer, tanto en la matriz de costo como
+            en las coordenadas de los lugares, la ultima locacion como el colegio.
+            ''')
+
+            clave = st.sidebar.text_input('Clave Token')
+            coordenadas = st.sidebar.file_uploader('Archivo con las locaciones (.csv)')
+
+            if coordenadas is not None:
+                df = pd.read_csv(coordenadas, header=None, sep=',')
+                df_m = df.copy()
+                df_m.columns=['Longitude', 'Latitude']
+                df_show = df_m.copy()
+                df_show.index=[i+1 for i in range(len(df_m))]
+                st.write('''#### Direcciones''')
+                st.table(df_show)
+                lat = [i for i in df[0]]
+                lon = [i for i in df[1]]
+                lugares = [[lat[i], lon[i]] for i in range(len(lat))]
+
+                posiciones = {i+1:[df_m['Longitude'][i], df_m['Latitude'][i]] for i in range(len(df_m))}
+                rutas = {(i, j): [posiciones[i], posiciones[j]] for i in posiciones for j in posiciones}
+
+                rutas_selec = []
+                for i in X:
+                  if X[i] > 0:
+                      if i[0] == 'c':
+                          rutas_selec.append((last_term, i[1]))
+                      elif i[1] == 'c':
+                          rutas_selec.append((i[0], last_term))
+                      else:
+                          rutas_selec.append(i)
+                # correccion
+                rutas_selec = [i[2:-1].split(',') for i in rutas_selec]
+                rutas_selec = [(int(i[0]), int(i[1])) for i in rutas_selec]
+
+                st.write('''#### Rutas''')
+                for ind, i in enumerate(rutas_selec):
+                    st.write(f'**Ruta {ind+1}** = {i}')
+
+                rutas_selec_pos = []
+                for i in rutas_selec:
+                    rutas_selec_pos.append(rutas[i])
+
+                rutas_especificas = {}
+
+                for ind, i in enumerate(rutas_selec_pos):
+                    origen_lat = i[0][0]
+                    origen_lon =  i[0][1]
+                    destino_lat = i[1][0]
+                    destino_lon = i[1][1]
+                    rutas_especificas[f'ruta{ind+1}'] = [[float(origen_lat), float(origen_lon)], [float(destino_lat), float(destino_lon)]]
+                mapa = Mapas(clave, lugares)
+                map = mapa.Mapa_con_rutas(rutas_especificas=rutas_especificas)
+
+                #colorear los puntos
+                rojo = [len(posiciones)]
+                amarillo = [i[1] for i in rutas_selec if i[1] != rojo]
+                verde = [i[0] for i in rutas_selec if i[0] not in amarillo]
+
+
+                for i in posiciones:
+                    cord_fol = [posiciones[i][1], posiciones[i][0]]# para ordenar las coordenadas
+                    if i in rojo:
+                        folium.Marker(cord_fol, popup=f'P{i}', icon=folium.Icon(color="red")).add_to(map)
+                    elif i in amarillo:
+                        folium.Marker(cord_fol, popup=f'P{i}', icon=folium.Icon(color="blue")).add_to(map)
+                    elif i in verde:
+                        folium.Marker(cord_fol, popup=f'P{i}', icon=folium.Icon(color="green")).add_to(map)
+
+
+
+                folium_static(map)
