@@ -1,8 +1,11 @@
 import streamlit as st
+from streamlit_folium import folium_static
 import pandas as pd
 import numpy as np
 import requests
 from gurobipy import Model, quicksum, GRB
+from mapas import Mapas
+import folium
 
 class Facility_Location():
   def __init__(self, matrix_cost, dem, initial_route_cost, last_route_cost, cap, Q=False):
@@ -191,6 +194,12 @@ class Facility_Location_st():
 
         st.sidebar.write('**Archivos descargables**')
 
+        coord_file = requests.get('https://raw.githubusercontent.com/raaraya1/transport-models-web/main/coordenadas%20(hogares%20-%20paraderos%20-%20colegio).csv')
+        st.sidebar.download_button(label='Locaciones (hogares - paraderos - colegio).csv',
+                                   data=coord_file.content,
+                                   file_name='coordenadas (H-P-C).csv',
+                                   mime='text/csv')
+
         cost_matrix_hogares_colegio_csv = pd.read_csv('https://raw.githubusercontent.com/raaraya1/transport-models-web/main/cost_matrix%20(hogares%20-%20colegio).csv')
         st.sidebar.download_button(label='matrix_cost (hogares-colegio).csv',
                                    data=cost_matrix_hogares_colegio_csv.to_csv(index=False),
@@ -356,3 +365,118 @@ class Facility_Location_st():
             except:
                 sol = modelo.solve()
                 st.write(str(sol))
+
+            st.sidebar.write('**Visualizacion de resultados**')
+
+            st.write(r'''
+            ### Visualizacion de Resultados
+            Para la visualizacion de los resultados es
+            necesario crearnos una cuenta de usuario en
+            https://openrouteservice.org y luego utilizar la clave
+            generada (esta luego la debemos introducir en el panel a la izquierda)
+
+            - **Puntos Verdes**: Hogares
+            - **Puntos Azules**: Paraderos
+            - **Punto Rojo**: Colegio
+
+            **Nota:** Es necesario establecer, tanto en la matriz de costo como
+            en las coordenadas de los lugares, la ultima locacion como el colegio.
+            ''')
+
+            clave = st.sidebar.text_input('Clave Token')
+            coordenadas = st.sidebar.file_uploader('Archivo con las locaciones (.csv)')
+
+            if coordenadas is not None:
+
+                df =  pd.read_csv(coordenadas, delimiter=';', encoding= 'unicode_escape')
+                st.dataframe(df)
+
+                Hogares = [i.split(',') for i in df['Hogares'][:len(hogares)]]
+                Hogares = [[float(i[0]), float(i[1])] for i in Hogares]
+
+                Paraderos = [i.split(',') for i in df['Paraderos'][:len(paraderos)]]
+                Paraderos = [[float(i[0]), float(i[1])] for i in Paraderos]
+
+                colegio = [float(i) for i in df['Colegio'][0].split(',')]
+
+                def lat_lon(lista):
+                    lat = [i[1] for i in lista]
+                    lon = [i[0] for i in lista]
+                    lugares = [[lat[i], lon[i]] for i in range(len(lat))]
+                    return lugares
+
+                h_folium = lat_lon(Hogares)
+                p_folium = lat_lon(Paraderos)
+                c_folium = [colegio[1], colegio[0]]
+
+                h_posiciones = {i+1:Hogares[i] for i in range(len(Hogares))}
+                p_posiciones = {i+1:Paraderos[i] for i in range(len(Paraderos))}
+                rutas_h_p = {(i, j): [h_posiciones[i], p_posiciones[j]] for i in h_posiciones for j in p_posiciones}
+                rutas_h_c = {i: [h_posiciones[i], colegio] for i in h_posiciones}
+                rutas_p_c = {j: [p_posiciones[j], colegio] for j in p_posiciones}
+
+                rutas_selec_h_p = []
+                for i in Y_solve:
+                  if Y_solve[i] > 0:
+                    valor = i[3:-1].split(',')
+                    valor = (int(valor[0]), int(valor[1]))
+                    rutas_selec_h_p.append(valor)
+
+                rutas_selec_h_c = []
+                for i in Z_solve:
+                  if Z_solve[i] > 0:
+                      valor = int(i[2:])
+                      rutas_selec_h_c.append(valor)
+
+                rutas_selec_p_c = []
+                for i in X_solve:
+                  if X_solve[i] > 0:
+                      valor = int(i[2:])
+                      rutas_selec_p_c.append(valor)
+
+                rutas_selec_h_p_pos = [rutas_h_p[i] for i in rutas_selec_h_p]
+                rutas_selec_h_c_pos = [rutas_h_c[i] for i in rutas_selec_h_c]
+                rutas_selec_p_c_pos = [rutas_p_c[i] for i in rutas_selec_p_c]
+
+                rutas_especificas_h_p = {}
+                rutas_especificas_h_c = {}
+                rutas_especificas_p_c = {}
+
+                def gen_rutas(rutas_selec_pos, origen, destino):
+                    rutas_especificas = {}
+                    for ind, i in enumerate(rutas_selec_pos):
+                        origen_lat = i[0][0]
+                        origen_lon =  i[0][1]
+                        destino_lat = i[1][0]
+                        destino_lon = i[1][1]
+                        rutas_especificas[f'ruta{ind+1} ({origen} -> {destino})'] = [[float(origen_lat), float(origen_lon)], [float(destino_lat), float(destino_lon)]]
+                    return rutas_especificas
+
+                rutas_especificas_h_p = gen_rutas(rutas_selec_h_p_pos, 'H', 'P')
+                rutas_especificas_h_c = gen_rutas(rutas_selec_h_c_pos, 'H', 'C')
+                rutas_especificas_p_c = gen_rutas(rutas_selec_p_c_pos, 'P', 'C')
+
+
+                lugares = []
+                for i in Hogares: lugares.append(i)
+                for i in Paraderos: lugares.append(i)
+                lugares.append(colegio)
+
+                rutas_especificas = {}
+                for i in rutas_especificas_h_p: rutas_especificas[i] = rutas_especificas_h_p[i]
+                for i in rutas_especificas_h_c: rutas_especificas[i] = rutas_especificas_h_c[i]
+                for i in rutas_especificas_p_c: rutas_especificas[i] = rutas_especificas_p_c[i]
+
+                mapa = Mapas(clave, lugares)
+                map = mapa.Mapa_con_rutas(rutas_especificas=rutas_especificas)
+
+                #colorear los puntos
+                rojo = [colegio[1], colegio[0]]
+                azul = lat_lon(Paraderos)
+                verde = lat_lon(Hogares)
+
+                folium.Marker(rojo, popup='C', icon=folium.Icon(color="red")).add_to(map)
+                for idx, i in enumerate(azul): folium.Marker(i, popup=f'P{idx+1}', icon=folium.Icon(color="blue")).add_to(map)
+                for idx, i in enumerate(verde): folium.Marker(i, popup=f'H{idx+1}', icon=folium.Icon(color="green")).add_to(map)
+
+                folium_static(map)
