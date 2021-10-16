@@ -46,13 +46,13 @@ elif model_name == 'TSP_MTZ':
 # Para usar google analytics
 google_analytics_js = '''
 <!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-ZG90W7FB1J"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-210353274-1"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
 
-  gtag('config', 'G-ZG90W7FB1J');
+  gtag('config', 'UA-210353274-1');
 </script>
 '''
 st.components.v1.html(google_analytics_js)
