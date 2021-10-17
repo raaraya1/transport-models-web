@@ -5,6 +5,7 @@ from Facility_Location_st import Facility_Location_st
 from TSP_MTZ_st import TSP_MTZ_st
 from PIL import Image
 import re
+import os
 
 
 col1, col2 = st.columns([1, 5])
