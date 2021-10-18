@@ -3,6 +3,7 @@ from Colaboraty_transport_st import Colaboratory_Transport_st
 from Colaboraty_transport_dinamic_st import Colaboraty_transport_dinamic_st
 from Facility_Location_st import Facility_Location_st
 from TSP_MTZ_st import TSP_MTZ_st
+from TSP_dinamic_st import TSP_dinamic_st
 from PIL import Image
 import re
 import os
@@ -27,10 +28,13 @@ Así, durante la conversación, se originaron distintas estrategias de cómo abo
 
 ''')
 
-
 st.sidebar.write('**Modelos**')
 model_name = st.sidebar.selectbox('Seleccionar Modelo',
-                                 ['Colaboratory_Transport', 'Dinamic_Colaboratory_Transport', 'Facility_Location', 'TSP_MTZ'])
+                                 ['Colaboratory_Transport',
+                                 'Dinamic_Colaboratory_Transport',
+                                 'Facility_Location',
+                                 'TSP_MTZ',
+                                 'TSP_dinamic'])
 
 if model_name == 'Colaboratory_Transport':
     Colaboratory_Transport_st().interactive_model()
@@ -43,6 +47,10 @@ elif model_name == 'Facility_Location':
 
 elif model_name == 'TSP_MTZ':
     TSP_MTZ_st().interactive_model()
+
+elif model_name == 'TSP_dinamic':
+    TSP_dinamic_st().interactive_model()
+
 
 # agregar google analytics
 anlytcs_code = """<script async src="https://www.googletagmanager.com/gtag/js?id=UA-210353274-1"></script>
