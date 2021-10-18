@@ -140,8 +140,8 @@ class TSP_dinamic_st():
         ### **¿Cómo me imagino el problema?**
 
         Generalmente cuanto empiezo a modelar un problema, siempre me pongo en
-        de las veces estas pasan a ser variables directas del modelo).
         el lugar de quien tiene que tomar las decisiones o acciones (la mayoría
+        de las veces estas pasan a ser variables directas del modelo).
 
         Para este caso, me tendré que poner en el lugar del vendedor y, en
         consecuencia, las preguntas validas que me podría hacer son las siguientes:
