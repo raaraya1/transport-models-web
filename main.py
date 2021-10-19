@@ -59,7 +59,7 @@ new_interface_streamlit = '''
                     header {visibility: hidden;}
                     </style>
 '''
-st.markdown(new_interface_streamlit, unsafe_allow_html=True)
+st.markdown(new_interface_streamlit)
 
 # agregar google analytics
 anlytcs_code = """<script async src="https://www.googletagmanager.com/gtag/js?id=UA-210353274-1"></script>
