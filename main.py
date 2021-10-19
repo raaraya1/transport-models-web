@@ -54,7 +54,7 @@ elif model_name == 'TSP_dinamic':
 # cambios en la interfaz de streamlit
 new_interface_streamlit = '''
                     <style>
-                    #MainMenu {visibility: visible;}
+                    #MainMenu {visibility: hidden;}
                     footer {visibility: hidden;}
                     header {visibility: hidden;}
                     </style>
