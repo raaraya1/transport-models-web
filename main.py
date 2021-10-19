@@ -51,6 +51,15 @@ elif model_name == 'TSP_MTZ':
 elif model_name == 'TSP_dinamic':
     TSP_dinamic_st().interactive_model()
 
+# cambios en la interfaz de streamlit
+new_interface_streamlit = '''
+                    <style>
+                    #MainMenu {visibility: visible;}
+                    footer {visibility: hidden;}
+                    header {visibility: hidden;}
+                    </style>
+'''
+st.markdown(new_interface_streamlit, unsafe_allow_html=True)
 
 # agregar google analytics
 anlytcs_code = """<script async src="https://www.googletagmanager.com/gtag/js?id=UA-210353274-1"></script>
