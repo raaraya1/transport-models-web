@@ -1,5 +1,5 @@
 import streamlit as st
-from ProgramacionLineal.mapas import *
+from app.ProgramacionLineal.mapas import *
 from ProgramacionLineal.Colaboraty_transport_dinamic_st import *
 from ProgramacionLineal.Facility_Location_st import *
 from ProgramacionLineal.Colaboraty_transport_st import *
