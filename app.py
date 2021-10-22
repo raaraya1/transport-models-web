@@ -1,15 +1,15 @@
 import streamlit as st
 #from .mapas import *
-from ..ProgramacionLineal import *
+from .ProgramacionLineal import *
 #from .Facility_Location_st import *
 #from .Colaboraty_transport_st import *
 #from .TSP_MTZ_st import *
 #from .TSP_dinamic_st import *
 #from .main import *
 
-from Home.home import *
+from .Home import *
 
-from ..Contact import *
+from .Contact import *
 
 from PIL import Image
 from custom_streamlit import custom
