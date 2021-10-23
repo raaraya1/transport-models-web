@@ -3,17 +3,16 @@ import streamlit as st
 def home():
     st.write('''
     # HOME
-    ### **¿Donde estoy?**
-    Hola, si llegaste aqui y no sabes como, te cuento que esta pagina la elaboré
-    con el fin de jugar un rato. En sentido, te aclaro desde el inicio que no soy
-    ningun programador por profesión, sin embargo, si he visto en esta la
-    oportunidad para materializar una idea y difundir el conocimiento.
+    ### **¿Dónde estoy?**
+    Hola, si llegaste aquí y no sabes cómo, te cuento que esta página la elaboré
+    con el fin de jugar un rato. En este sentido, te comento que he estado
+    probando una nueva biblioteca de Python llamada streamlit y, por lo visto,
+    esta tiene la potencialidad de ser una herramienta bastante útil a la hora
+    de materializar una idea o difundir el conocimiento.
 
-
-    Así, si algo de aqui te llegase a resultar util sientete libre de
-    usarlo, modificarlo u optimizarlo a tu gusto. Aqui abajo te dejo algunos ejemplos
-    de lo que te puedes encontrar en esta pagina.
-
+    Así, si algo de aquí te llegase a resultar útil siéntete libre de usarlo,
+    modificarlo u optimizarlo a tu gusto. Aquí abajo te dejo algunos ejemplos
+    de lo que te puedes encontrar en esta página.
 
     #### **Linear Models App**
     ''')
@@ -24,8 +23,7 @@ def home():
 
     col1.video(video_bytes)
     col2.write('''
-    Esta app esta escrita en Python con la ayuda
-    de las bibliotecas de `gurobipy` para resolver el modelo,
-    `streamlit` para el funcionamiento de la app y `folium`
-    para la generación de los mapas.
+    Esta app está escrita en Python con la ayuda de las bibliotecas de `gurobipy`
+    para resolver el modelo matemático, `streamlit` para el funcionamiento de la
+    app y `folium` y `openrouteservice` para la generación de los mapas y las rutas.
     ''')
