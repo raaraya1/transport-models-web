@@ -194,31 +194,31 @@ class Facility_Location_st():
 
         st.sidebar.write('**Archivos descargables**')
 
-        coord_file = requests.get('https://raw.githubusercontent.com/raaraya1/transport-models-web/main/coordenadas%20(hogares%20-%20paraderos%20-%20colegio).csv')
+        coord_file = requests.get('https://raw.githubusercontent.com/raaraya1/transport-models-web/main/Descargables/coordenadas%20(hogares%20-%20paraderos%20-%20colegio).csv')
         st.sidebar.download_button(label='Locaciones (hogares - paraderos - colegio).csv',
                                    data=coord_file.content,
                                    file_name='coordenadas (H-P-C).csv',
                                    mime='text/csv')
 
-        cost_matrix_hogares_colegio_csv = pd.read_csv('https://raw.githubusercontent.com/raaraya1/transport-models-web/main/cost_matrix%20(hogares%20-%20colegio).csv')
+        cost_matrix_hogares_colegio_csv = pd.read_csv('https://raw.githubusercontent.com/raaraya1/transport-models-web/main/Descargables/cost_matrix%20(hogares%20-%20colegio).csv')
         st.sidebar.download_button(label='matrix_cost (hogares-colegio).csv',
                                    data=cost_matrix_hogares_colegio_csv.to_csv(index=False),
                                    file_name='matrix_cost(hogares-colegio).csv',
                                    mime='text/csv')
 
-        cost_matrix_hogares_paraderos_csv = pd.read_csv('https://raw.githubusercontent.com/raaraya1/transport-models-web/main/cost_matrix%20(hogares%20-%20paraderos).csv')
+        cost_matrix_hogares_paraderos_csv = pd.read_csv('https://raw.githubusercontent.com/raaraya1/transport-models-web/main/Descargables/cost_matrix%20(hogares%20-%20paraderos).csv')
         st.sidebar.download_button(label='matrix_cost (hogares-paraderos).csv',
                                    data=cost_matrix_hogares_paraderos_csv.to_csv(index=False),
                                    file_name='matrix_cost (hogares-paraderos).csv',
                                    mime='text/csv')
 
-        cost_matrix_paraderos_colegio_csv = pd.read_csv('https://raw.githubusercontent.com/raaraya1/transport-models-web/main/cost_matrix%20(paraderos%20-%20colegio).csv')
+        cost_matrix_paraderos_colegio_csv = pd.read_csv('https://raw.githubusercontent.com/raaraya1/transport-models-web/main/Descargables/cost_matrix%20(paraderos%20-%20colegio).csv')
         st.sidebar.download_button(label='matrix_cost (paraderos-colegio).csv',
                                    data=cost_matrix_paraderos_colegio_csv.to_csv(index=False),
                                    file_name='matrix_cost(paraderos-colegio).csv',
                                    mime='text/csv')
 
-        model_file = requests.get('https://raw.githubusercontent.com/raaraya1/transport-models-web/main/Facility_Location.py')
+        model_file = requests.get('https://raw.githubusercontent.com/raaraya1/transport-models-web/main/Descargables/Facility_Location.txt')
         #st.write(model_file.content)
         st.sidebar.download_button(label='model_file.txt',
                                    data=model_file.content,

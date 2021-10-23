@@ -133,19 +133,19 @@ class TSP_MTZ_st():
 
         st.sidebar.write('**Archivos descargables**')
 
-        coord_file = pd.read_csv('https://raw.githubusercontent.com/raaraya1/Personal-Proyects/main/Proyectos/web_app/coordenadas.csv')
+        coord_file = pd.read_csv('https://raw.githubusercontent.com/raaraya1/transport-models-web/main/Descargables/coordenadas.csv')
         st.sidebar.download_button(label='Locaciones.csv',
                                    data=coord_file.to_csv(index=False),
                                    file_name='coordenadas.csv',
                                    mime='text/csv')
 
-        cost_matrix_csv = pd.read_csv('https://raw.githubusercontent.com/raaraya1/transport-models-web/main/cost_matrix.csv')
+        cost_matrix_csv = pd.read_csv('https://raw.githubusercontent.com/raaraya1/transport-models-web/main/Descargables/cost_matrix.csv')
         st.sidebar.download_button(label='matrix_cost.csv',
                                    data=cost_matrix_csv.to_csv(index=False),
                                    file_name='matrix_cost.csv',
                                    mime='text/csv')
 
-        model_file = requests.get('https://raw.githubusercontent.com/raaraya1/transport-models-web/main/TSP_MTZ.py')
+        model_file = requests.get('https://raw.githubusercontent.com/raaraya1/transport-models-web/main/Descargables/TSP_MTZ.txt')
         #st.write(model_file.content)
         st.sidebar.download_button(label='model_file.txt',
                                    data=model_file.content,
