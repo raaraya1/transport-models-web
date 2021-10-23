@@ -5,10 +5,16 @@ def contacto():
     st.write('''
     # Contacto
     ''')
-    logo_github = Image.open('Contact/GitHub-Mark-32px.png')
-    logo_linkedin = Image.open('Contact/LI-in-Bug.png')
-    logo_correo = Image.open('Contact/Gmail_2013.png')
-    logo_whatsapp = Image.open('Contact/whatsapp-logo-1.png')
+
+    logo_github = "https://raw.githubusercontent.com/raaraya1/transport-models-web/main/Contact/GitHub-Mark-32px.png"
+    logo_linkedin = "https://raw.githubusercontent.com/raaraya1/transport-models-web/main/Contact/LI-In-Bug.png"
+    logo_correo = "https://raw.githubusercontent.com/raaraya1/transport-models-web/main/Contact/Gmail_2013.png"
+    logo_whatsapp = "https://raw.githubusercontent.com/raaraya1/transport-models-web/main/Contact/whatsapp-logo-1.png"
+
+    #logo_github = Image.open('Contact/GitHub-Mark-32px.png')
+    #logo_linkedin = Image.open('Contact/LI-in-Bug.png')
+    #logo_correo = Image.open('Contact/Gmail_2013.png')
+    #logo_whatsapp = Image.open('Contact/whatsapp-logo-1.png')
 
     col0, col1, col2 = st.columns([1, 2, 30])
     a = 13
