@@ -7,6 +7,11 @@ from ProgramacionLineal.TSP_MTZ_st import *
 from ProgramacionLineal.TSP_dinamic_st import *
 from ProgramacionLineal.main import *
 
+from FastaiCourse.cat_vs_dog.cat_vs_dog import *
+from FastaiCourse.sentiment_classifier.sent_class import *
+from FastaiCourse.request_from_drive import *
+from FastaiCourse.main import *
+
 from Home.home import *
 
 from Contact.contacto import *
@@ -25,7 +30,7 @@ custom()
 
 # barra de navegacion
 navbar = st.container()
-paginas = ['Home', 'Linear Models', 'Contact']
+paginas = ['Home', 'Linear Models', 'Fastai Course', 'Contact']
 pagina = navbar.radio('', paginas)
 
 # opcions
@@ -34,6 +39,9 @@ if pagina == 'Home':
 
 elif pagina == 'Linear Models':
     lineal_models()
+
+elif pagina == 'Fastai Course':
+    fastai_models()
 
 elif pagina == 'Contact':
     contacto()

@@ -6,3 +6,6 @@ gurobipy==9.1.2
 requests==2.24.0
 folium==0.12.1
 openrouteservice==2.3.3
+spacy==2.2.4
+googletrans==4.0.0-rc1
+fastbook==0.0.16
