@@ -57,6 +57,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 })(window,document,'script','dataLayer','GTM-5HBDFMT');</script>
 '''
 
+tag_code_body == '''
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5HBDFMT"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+'''
+
 # buscar el archivo index.html
 path_ind = os.path.dirname(st.__file__)+'/static/index.html'
 
