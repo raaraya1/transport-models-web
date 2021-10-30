@@ -77,5 +77,5 @@ with open(path_ind, 'r') as index_file:
 
             # pegamos los codigos en el archivo HTML
             newdata=re.sub('<head>','<head>'+ anlytcs_code + tag_code_head, data)
-            newdata=re.sub('<body>','<bpdy>'+ tag_code_body, newdata)
+            newdata=re.sub('<body>','<body>'+ tag_code_body, newdata)
             index_file_f.write(newdata)
