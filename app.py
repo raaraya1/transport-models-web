@@ -48,20 +48,28 @@ anlytcs_code = """<script async src="https://www.googletagmanager.com/gtag/js?id
   gtag('config', 'UA-210353274-1');
 </script>"""
 
-# Fetch the path of the index.html file
+# agregar google tag manager (en head)
+tag_code_head = '''
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-5HBDFMT');</script>
+'''
+
+# buscar el archivo index.html
 path_ind = os.path.dirname(st.__file__)+'/static/index.html'
 
-# Open the file
+# abrimos el archivo
 with open(path_ind, 'r') as index_file:
     data=index_file.read()
 
-    # Check whether there is GA script
+    # verificamos si existe el GA script
     if len(re.findall('UA-', data))==0:
 
-        # Insert Script for Google Analytics
+        # ahora insertmas el google analytics y tag manager
         with open(path_ind, 'w') as index_file_f:
 
-            # The Google Analytics script should be pasted in the header of the HTML file
-            newdata=re.sub('<head>','<head>'+anlytcs_code,data)
-
-            index_file_f.write(newdata)
+            # pegamos los codigos en el archivo HTML file
+            newdata1=re.sub('<head>','<head>'+ anlytcs_code + tag_code_head, data)
+            index_file_f.write(newdata1)
