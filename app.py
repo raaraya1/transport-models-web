@@ -72,10 +72,10 @@ with open(path_ind, 'r') as index_file:
     # verificamos si existe el GA script
     if len(re.findall('UA-', data))==0:
 
-        # ahora insertmas el google analytics y tag manager
+        # ahora insertamos google analytics y tag manager
         with open(path_ind, 'w') as index_file_f:
 
-            # pegamos los codigos en el archivo HTML file
+            # pegamos los codigos en el archivo HTML
             newdata=re.sub('<head>','<head>'+ anlytcs_code + tag_code_head, data)
             newdata=re.sub('<body>','<bpdy>'+ tag_code_body, newdata)
             index_file_f.write(newdata)
