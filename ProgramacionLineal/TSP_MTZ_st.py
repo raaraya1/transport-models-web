@@ -65,15 +65,15 @@ class TSP_MTZ_st():
         ### Modelo con bus de acercamiento a domicilio
         **Supuestos**
 
-        - El bus cuenta con la suficiente capacidad para trasnportar a todos los niños.
+        - El bus cuenta con la suficiente capacidad para transportar a todos los niños.
 
         **Conjuntos**
 
         - $i \in I$: Conjunto de localidades
 
-        - $j \in J$: Conjunto de localidades (el mimso que $I$)
+        - $j \in J$: Conjunto de localidades (el mismo que $I$)
 
-        **Parametros**
+        **Parámetros**
 
         - $C_{ij}$: Costo de ir desde el punto i al punto j.
 
@@ -81,11 +81,11 @@ class TSP_MTZ_st():
 
         **Variables**
 
-        - $X_{ij} \in (0, 1)$: Si recorró desde el punto i al punto j.
+        - $X_{ij} \in (0, 1)$: Si recorro desde el punto i al punto j.
 
         - $U_{i}$: Variable auxiliar en punto i
 
-        **Funcion Objetivo**
+        **Función Objetivo**
 
         $$
         min \sum_{i} \sum_{j} C_{ij}X_{ij}
@@ -93,20 +93,20 @@ class TSP_MTZ_st():
 
         **Restricciones**
 
-        1) Desde un nodo solo sale 1 unico arco.
+        1) Desde un nodo solo sale 1 único arco.
 
         $$
         \sum_{j} X_{ij} = 1 \quad \forall i \in I
         $$
 
 
-        2) Hacia un nodo solo entra 1 unico arco.
+        2) Hacia un nodo solo entra 1 único arco.
 
         $$
         \sum_{i} X_{ij} = 1 \quad \forall j \in I
         $$
 
-        3) Eliminacion de subciclos (Restricciones MTZ)
+        3) Eliminación de subciclos (Restricciones MTZ)
 
         $$
         U_{1} = 1
@@ -204,8 +204,8 @@ class TSP_MTZ_st():
             st.sidebar.write('**Visualizacion de resultados**')
 
             st.write(r'''
-            ### Visualizacion de Resultados
-            Para la visualizacion de los resultados es
+            ### Visualización de Resultados
+            Para la visualización de los resultados es
             necesario crearnos una cuenta de usuario en
             https://openrouteservice.org y luego utilizar la clave
             generada (esta luego la debemos introducir en el panel a la izquierda)
@@ -215,8 +215,9 @@ class TSP_MTZ_st():
             - **Punto Rojo**: Destino final (para este caso el colegio)
 
             **Nota:** Es necesario establecer, tanto en la matriz de costo como
-            en las coordenadas de los lugares, la ultima locacion como el colegio.
+            en las coordenadas de los lugares, la última locación como el colegio.
             ''')
+
 
             clave = st.sidebar.text_input('Clave Token')
             coordenadas = st.sidebar.file_uploader('Archivo con las locaciones (.csv)')

@@ -141,7 +141,7 @@ class Colaboratory_Transport_st():
         **Supuestos:**
 
         1. Todos los niños de las familias deben ser transportados al colegio.
-        2. Todas las familias cuentan con un mismo vehiculo cuya capacidad no supera las 4 personas (sin incluir al conductor)
+        2. Todas las familias cuentan con un mismo vehículo cuya capacidad no supera las 4 personas (sin incluir al conductor)
         3. El costo de la bencina es igual para todas las familias
         4. Solo puedo ayudar a 1 vecino a transportar a sus hijos.
         5. Si ayudo a un vecino, transportaré a todos sus hijos.
@@ -150,20 +150,20 @@ class Colaboratory_Transport_st():
 
         **Conjuntos:**
 
-         - $i \in I$: Locacion de las familias + colegio, donde $i=c$ es el colegio.
+         - $i \in I$: Locación de las familias + colegio, donde $i=c$ es el colegio.
 
-        **Parametros:**
+        **Parámetros:**
 
-         - $N_{i}$: Numero de niños, perteneciente a la familia i.
-         - $Dc_{i}$: Distancia entre la locacion de la familia i al colegio.
-         - $D_{ij}$: Distancia entre la locacion de la familia i y la locacion de la familia j.
+         - $N_{i}$: Número de niños, perteneciente a la familia i.
+         - $Dc_{i}$: Distancia entre la locación de la familia i al colegio.
+         - $D_{ij}$: Distancia entre la locación de la familia i y la locación de la familia j.
          - $Cb$: Costo de la bencina por km.
 
         **Variables:**
 
-        $X_{ij} \in (0, 1)$: Si se realiza un viaje desde la locacion i hasta la locacion j.
+        $X_{ij} \in (0, 1)$: Si se realiza un viaje desde la locación i hasta la locación j.
 
-        **Funcion objetivo:**
+        **Función objetivo:**
 
         $$
         min \sum_{i}\sum_{j} CbD_{ij}X_{ij}
@@ -330,8 +330,8 @@ class Colaboratory_Transport_st():
             st.sidebar.write('**Visualizacion de resultados**')
 
             st.write(r'''
-            ### Visualizacion de Resultados
-            Para la visualizacion de los resultados es
+            ### Visualización de Resultados
+            Para la visualización de los resultados es
             necesario crearnos una cuenta de usuario en
             https://openrouteservice.org y luego utilizar la clave
             generada (esta luego la debemos introducir en el panel a la izquierda)
@@ -341,8 +341,9 @@ class Colaboratory_Transport_st():
             - **Punto Rojo**: Destino final (para este caso el colegio)
 
             **Nota:** Es necesario establecer, tanto en la matriz de costo como
-            en las coordenadas de los lugares, la ultima locacion como el colegio.
+            en las coordenadas de los lugares, la última locación como el colegio.
             ''')
+
 
             clave = st.sidebar.text_input('Clave Token')
             coordenadas = st.sidebar.file_uploader('Archivo con las locaciones (.csv)')

@@ -124,18 +124,18 @@ class TSP_dinamic_st():
         st.write(r'''
         ## **Variante TSP**
         La motivación de elaborar esta variante es que no me gusta la manera
-        tradicional en como se modelaba este problema. Así, espero poder
-        desarrollarlo de una manera mas intuitiva y con esto, también espero
+        tradicional en cómo se modelaba este problema. Así, espero poder
+        desarrollarlo de una manera más intuitiva y con esto, también espero
         que este modelo sea equiparable en cuanto a tiempos de procesamiento
         con los modelos tradicionales.
 
-        ### **¿En que consiste el TSP?**
+        ### **¿En qué consiste el TSP?**
         Este problema hace referencia a un vendedor que tiene por objetivo
         viajar por diferentes lugares para ir vendiendo sus mercancías. De esta
         manera, el problema que surge entonces es que a este vendedor le
         gustaría recorrer todas estas ciudades al menor costo posible.
         (En este recorrido se exige que el punto de inicio corresponda con el
-        punto de termino del recorrido)
+        punto de término del recorrido)
 
         ### **¿Cómo me imagino el problema?**
 
@@ -149,15 +149,15 @@ class TSP_dinamic_st():
         1. **¿Cuál es mi inicio?**
         2. **¿Dónde estoy parado?**
         3. **¿Cuántos viajes tendré que hacer?**
-        4. **¿Por cual empiezo?**
+        4. **¿Por cuál empiezo?**
         5. **¿Cuál es el siguiente lugar que quiero visitar?**
         6. **¿Cuáles son los lugares que me faltan por recorrer?**
 
         Ahora, si nos damos cuenta, algunas de estas preguntas se encuentran en
-        función de otras (por ejemplo, la pregunta 5 esta directamente relacionada
+        función de otras (por ejemplo, la pregunta 5 está directamente relacionada
         con la pregunta 6) y no solo eso, sino que algunas de estas respuestas
-        variaran de acuerdo al momento en que se formulan (por ejemplo, si en
-        un inicio me pregunto cuantos lugares me faltan por recorrer, lo mas
+        variaran de acuerdo con el momento en que se formulan (por ejemplo, si en
+        un inicio me pregunto cuántos lugares me faltan por recorrer, lo mas
         seguro es que si me vuelvo a hacer esta pregunta luego de haber recorrido
         algunas ciudades, la respuesta a esta pregunta cambie)
 
@@ -171,7 +171,7 @@ class TSP_dinamic_st():
         - ¿Cuál es mi inicio? -> $P_{0}$
         - ¿Cuántos viajes tendré que hacer? -> T = 5
         - ¿Cuáles son los lugares que me faltan por recorrer? -> $[P_{1}, P_{2}, P_{3}, P_{4}, P_{5}]$
-        - ¿Por cual empiezo? -> $P_{1}$
+        - ¿Por cuál empiezo? -> $P_{1}$
 
         **Ciclo**
 
@@ -191,7 +191,7 @@ class TSP_dinamic_st():
 
         - $i, j \in I$: Locaciones.
 
-        - $t \in T$: Pasos o periodos. (también puede ser entendido como el numero de arcos que debo asignar, así T = N-2)
+        - $t \in T$: Pasos o periodos. (también puede ser entendido como el número de arcos que debo asignar, así T = N-2)
 
 
         **Parámetros**
@@ -215,7 +215,7 @@ class TSP_dinamic_st():
 
         - $pos_{it} \in (0, 1)$: Marca en que punto me encuentro parado en el periodo t.
 
-        - $Wend_{i} \in (0, 1)$: Marca el ultimo lugar que visite en el recorrido.
+        - $Wend_{i} \in (0, 1)$: Marca el último lugar que visite en el recorrido.
 
 
         **Función Objetivo**
@@ -258,7 +258,7 @@ class TSP_dinamic_st():
         $$
 
 
-        6) No puedo visitar un lugar que ya visite
+        6) No puedo visitar un lugar que ya visité
 
         $$
         X_{ijt} \leq (1 - W_{jt}) \quad \forall i, j, t
@@ -285,14 +285,14 @@ class TSP_dinamic_st():
         \sum_{t} \sum_{i} \sum_{j} X_{ijt} = T
         $$
 
-        9) No puedo venir de dos o mas lugares hacia un mismo nodo de manera simultanea
+        9) No puedo venir de dos o más lugares hacia un mismo nodo de manera simultanea
 
         $$
         \sum_{i} X_{ijt} \leq 1 \quad \forall t, j
         $$
 
 
-        10) No puedo dirigirme hacia dos o mas lugares desde un mismo nodo de manera simultanea
+        10) No puedo dirigirme hacia dos o más lugares desde un mismo nodo de manera simultanea
 
         $$
         \sum_{j} X_{ijt} \leq 1 \quad \forall t, i
@@ -316,12 +316,13 @@ class TSP_dinamic_st():
         \sum_{i} X_{ijt} = pos_{jt+1} \quad \forall j, t \in (1, ..., T-1)
         $$
 
-        14) Rescato la ultima posición visitada
+        14) Rescato la última posición visitada
 
         $$
         Wend_{j} = \sum_{i} X_{ijT} \quad \forall j
         $$
                 ''')
+
 
     def interactive_model(self):
         st.write('''
@@ -420,8 +421,8 @@ class TSP_dinamic_st():
             st.sidebar.write('**Visualizacion de resultados**')
 
             st.write(r'''
-            ### Visualizacion de Resultados
-            Para la visualizacion de los resultados es
+            ### Visualización de Resultados
+            Para la visualización de los resultados es
             necesario crearnos una cuenta de usuario en
             https://openrouteservice.org y luego utilizar la clave
             generada (esta luego la debemos introducir en el panel a la izquierda)
@@ -431,7 +432,8 @@ class TSP_dinamic_st():
             - **Punto Rojo**: Destino final (para este caso el colegio)
 
             **Nota:** Es necesario establecer, tanto en la matriz de costo como
-            en las coordenadas de los lugares, la ultima locacion como el colegio.
+            en las coordenadas de los lugares, la última locación como el colegio.
+
             ''')
 
             clave = st.sidebar.text_input('Clave Token')

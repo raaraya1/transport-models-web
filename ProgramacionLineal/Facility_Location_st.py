@@ -91,26 +91,26 @@ class Facility_Location():
 class Facility_Location_st():
     def __init__(self):
         st.write(r'''
-        ## **Modelo con buses de acercamiento en puntos especificos**
+        ## **Modelo con buses de acercamiento en puntos específicos**
 
         **Supuestos:**
 
         1. Todos los niños de las familias deben ser transportados al colegio.
-        2. Todas las familias cuentan con un mismo vehiculo cuya capacidad no supera las 4 personas (sin incluir al conductor)
+        2. Todas las familias cuentan con un mismo vehículo cuya capacidad no supera las 4 personas (sin incluir al conductor)
         3. El costo de la bencina es el mismo entre auto y bus.
-        4. Del paradero solo partira un bus (puede no estar lleno)
-        5. No existe un costo asociado a la instalacion del paradero.
-        6. Si decido instalar un paradero, si o si saldra un bus desde esa locacion.
-        7. Todos las familias cuentan con un vehiculo con la capacidad de almacenamiento suficiente para enviar a sus hijos.
+        4. Del paradero solo partirá un bus (puede no estar lleno)
+        5. No existe un costo asociado a la instalación del paradero.
+        6. Si decido instalar un paradero, si o si saldrá un bus desde esa locación.
+        7. Todas las familias cuentan con un vehículo con la capacidad de almacenamiento suficiente para enviar a sus hijos.
 
         **Conjuntos**
-        - $i \in I$: Locacion de las familias + colegio, donde $i=c$ es el colegio.
+        - $i \in I$: Locación de las familias + colegio, donde $i=c$ es el colegio.
         - $j \in J$: Posibles puntos de paradero.
 
-        **Parametros**
+        **Parámetros**
 
-         - $N_{i}$: Numero de niños, perteneciente a la familia i.
-         - $Dc_{i}$: Distancia entre la locacion de la familia i al colegio.
+         - $N_{i}$: Número de niños, perteneciente a la familia i.
+         - $Dc_{i}$: Distancia entre la locación de la familia i al colegio.
          - $D_{ij}$: Distancia de la familia i al paradero j.
          - $Dj_{j}$: Distancia entre el paradero j al colegio.
          - $CAPb$: Capacidad del bus.
@@ -127,7 +127,7 @@ class Facility_Location_st():
 
         $W_{j}$: Variable de nivel que marca la cantidad de niños en el bus del paradero j.
 
-        **Funcion Objetivo**
+        **Función Objetivo**
 
         $$
         min \sum_{i}\sum_{j} CbD_{ij}Y_{ij} + \sum_{j} CbDj_{j}X_{j} + \sum_{i} CbDc_{i}Z_{i}
@@ -147,7 +147,7 @@ class Facility_Location_st():
         W_{j} = \sum_{i}N_{i}Y_{ij} \quad \forall j \in J
         $$
 
-        3) No puedo enviar niños al paradero j si, sumando esta cantidad de niños que trae, como resultado se llegasé a sobrepasar la capacidad del bus.
+        3) No puedo enviar niños al paradero j si, sumando esta cantidad de niños que trae, como resultado se llegase a sobrepasar la capacidad del bus.
 
         $$
         Y_{ij} \leq (2 - \frac{W_{j} + N_{i}}{CAPb}) \quad \forall i \in I, j \in J
@@ -160,7 +160,7 @@ class Facility_Location_st():
         Y_{ij} \leq (1 - Z_{i}) \quad \forall i \in I, j \in J
         $$
 
-        5) No puedo enviar a los niños a dos o mas paraderos diferentes.
+        5) No puedo enviar a los niños a dos o más paraderos diferentes.
 
         $$
         \sum_{j} Y_{ij} \leq 1 \quad \forall i \in I
@@ -179,7 +179,7 @@ class Facility_Location_st():
         $$
 
 
-        8) (Opcional) Numero de paraderos maximo (Para este caso, tambien puede ser visto como el numero maximo de buses que dispongo)
+        8) (Opcional) Numero de paraderos máximo (Para este caso, también puede ser visto como el numero máximo de buses que dispongo)
 
         $$
         X_{j} \leq N_{bus} \quad \forall j \in J
@@ -369,8 +369,8 @@ class Facility_Location_st():
             st.sidebar.write('**Visualizacion de resultados**')
 
             st.write(r'''
-            ### Visualizacion de Resultados
-            Para la visualizacion de los resultados es
+            ### Visualización de Resultados
+            Para la visualización de los resultados es
             necesario crearnos una cuenta de usuario en
             https://openrouteservice.org y luego utilizar la clave
             generada (esta luego la debemos introducir en el panel a la izquierda)
@@ -380,7 +380,8 @@ class Facility_Location_st():
             - **Punto Rojo**: Colegio
 
             **Nota:** Es necesario establecer, tanto en la matriz de costo como
-            en las coordenadas de los lugares, la ultima locacion como el colegio.
+            en las coordenadas de los lugares, la última locación como el colegio.
+
             ''')
 
             clave = st.sidebar.text_input('Clave Token')
