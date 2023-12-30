@@ -1,3 +1,3 @@
 # transport-models-web
 
-https://transport-models-streamlit.herokuapp.com
+https://huggingface.co/spaces/raaraya/Demo_Transport_Models
